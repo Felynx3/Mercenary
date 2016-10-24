@@ -32,9 +32,11 @@ def main():
     hud = Hud(jugador, enemigos, gameState)
     while True:
         for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
             if event.type == KEYDOWN:
                 key = pygame.key.name(event.key)
-
                 if key == "q":
                     pygame.quit()
                     sys.exit()

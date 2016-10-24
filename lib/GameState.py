@@ -18,8 +18,17 @@ class GameState:
             self.etapa = 1
             self.zona += 1
         self.fondo.cambioEscena(self.zona, self.etapa)
+        if self.etapa > 3:
+            self.etapa = 1
+            self.zona += 1
+        if self.zona >= 3:
+            #hacer algo cuando se termina el juego
+            print("ganaste")
+            pygame.event.post(pygame.event.Event(QUIT))
+        self.fondo.cambioEscena(self.zona, self.etapa)
 
     def reiniciarZona(self):
+        self.etapa = 2
         self.etapa = 1
         self.fondo.cambioEscena(self.zona, 1)
         self.estado = "jugando"

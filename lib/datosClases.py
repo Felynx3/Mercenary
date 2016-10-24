@@ -69,10 +69,10 @@ ENEMIGOS_ETAPA = {
 CLASES_ETAPA = {
     "1-1": ["goblin"],
     "1-2": ["goblin"],
-    "1-3": ["goblin", "swordman"],
-    "2-1": ["goblin", "swordman"],
-    "2-2": ["goblin", "swordman"],
-    "2-3": ["goblin", "swordman"]
+    "1-3": ["goblin"],
+    "2-1": ["goblin"],
+    "2-2": ["goblin"],
+    "2-3": ["goblin"]
 }
 
 VELOCIDAD_TRANSICION = 10
