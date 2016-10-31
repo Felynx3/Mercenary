@@ -142,6 +142,11 @@ class Sprite(pygame.sprite.Sprite):
             else:
                 pygame.event.post(pygame.event.Event(MUERTO))
 
+    def curar(self, cantidad):
+        self.vida += cantidad
+        if self.vida >= VIDA[self.clase]:
+            self.vida = VIDA[self.clase]
+
     def atacar(self):
         if not self.atacando:
             self.golpe = 1
@@ -185,7 +190,7 @@ class Sprite(pygame.sprite.Sprite):
     def update(self):
         if self.esEnemigo and not self.entrando:
             self.ia.update()
-        escenaRect = pygame.rect.Rect(0, 0, WIDTH, HEIGHT - 20)
+        escenaRect = pygame.rect.Rect(0, 0, WIDTH, HEIGHT - ALTURA_BASE)
         self.tiempoSalto += 0.017
         self.tiempoParaAnimar -= 1000 / 60
         if self.tiempoParaAnimar <= 0:

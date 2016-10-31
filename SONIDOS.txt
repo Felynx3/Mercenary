@@ -1,0 +1,7 @@
+-ataque
+-musica
+-muerte
+-daño recibido
+-salto
+-aparicion pota
+-agarrar pota

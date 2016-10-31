@@ -22,9 +22,14 @@ class Mercenary:
 
         self.jugador = pygame.sprite.GroupSingle()
         self.enemigos = pygame.sprite.Group()
+        self.items = pygame.sprite.Group()
+
+        self.items = pygame.sprite.Group()
         self.personaje = Sprite("jugador", "swordman", False)
         self.personaje.posicionar(WIDTH / 2, HEIGHT / 2)
+
         self.enemySpawner = EnemySpawner(self.gameState, self.enemigos, 1, self.personaje)
+        self.itemSpawner = ItemSpawner(self.items, 1)
         self.jugador.add(self.personaje)
 
         self.menu = MenuPrincipal(self.personaje)
@@ -47,6 +52,7 @@ class Mercenary:
             if key == "r" and self.gameState.estado == "gameover":
                 self.gameState.reiniciarZona()
                 self.enemySpawner.reiniciar()
+                self.itemSpawner.reiniciar()
                 self.personaje.reiniciar()
                 self.hud.reiniciar()
                 self.jugador.add(self.personaje)
@@ -78,15 +84,18 @@ class Mercenary:
             if not self.gameState.pausa:
                 self.jugador.update()
                 self.enemigos.update()
+                self.items.update()
                 self.collisionManager.colisionConGrupo(self.personaje, self.enemigos)
                 self.hud.update()
                 self.enemySpawner.update()
+                self.itemSpawner.update(self.jugador.sprite)
         if self.gameState.estado == "menu":
             self.jugador.update()
             self.menu.update()
 
     def draw(self):
         if self.gameState.estado == "jugando":
+            self.items.draw(self.screen)
             self.enemigos.draw(self.screen)
             self.jugador.draw(self.screen)
             self.hud.draw(self.screen)
@@ -117,6 +126,7 @@ class Mercenary:
                 if event.type == META_COMPLETADA:
                     self.gameState.siguienteEtapa()
                     self.enemySpawner.reiniciar()
+                    self.itemSpawner.reiniciar()
 
             self.update()
             self.draw()

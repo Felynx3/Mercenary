@@ -9,3 +9,4 @@ from CajaSonidos import CajaSonidos
 from CollisionManager import CollisionManager
 from GameOver import GameOver
 from MenuPrincipal import MenuPrincipal
+from ItemSpawner import ItemSpawner

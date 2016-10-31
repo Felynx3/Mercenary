@@ -12,7 +12,7 @@ class MenuPrincipal:
         self.jugar.image = pygame.image.load(os.path.join(".", "media", "imagenes", "clases", "goblin", "walk4.png"))
         self.jugar.image = pygame.transform.scale(self.jugar.image, (self.jugar.image.get_rect().w * 4, self.jugar.image.get_rect().h * 4))
         self.jugarRect = self.jugar.image.get_rect()
-        self.jugarRect.left, self.jugarRect.bottom = 120, HEIGHT - 20
+        self.jugarRect.left, self.jugarRect.bottom = 120, HEIGHT - ALTURA_BASE
 
     def update(self):
         pass
