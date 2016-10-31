@@ -33,7 +33,7 @@ NUMERO_SALTOS = {
 }
 
 VELOCIDAD_MOVIMIENTO = {
-    "swordman": 2.5,
+    "swordman": 4,
     "goblin": 2.5
 }
 

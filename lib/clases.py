@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from Fondo import*
-from IA import*
-from Sprite import*
-from Hud import*
-from GameState import*
-from EnemySpawner import*
-from CajaSonidos import*
-from CollisionManager import*
-from GameOver import*
-from MenuPrincipal import*
+from Fondo import Fondo
+from IA import IA
+from Sprite import Sprite
+from Hud import Hud
+from GameState import GameState
+from EnemySpawner import EnemySpawner
+from CajaSonidos import CajaSonidos
+from CollisionManager import CollisionManager
+from GameOver import GameOver
+from MenuPrincipal import MenuPrincipal

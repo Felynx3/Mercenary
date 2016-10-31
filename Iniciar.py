@@ -1,3 +1,4 @@
 from lib import main
 
-main.main()
+juego = main.Mercenary()
+juego.main()

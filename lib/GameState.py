@@ -12,6 +12,14 @@ class GameState:
 
         self.gameOverScreen = GameOver()
 
+    def update(self):
+        if self.estado == "apareciendo":
+            if not self.fondo.apareciendo:
+                self.estado = "jugando"
+        if self.estado == "cargandoMenu":
+            if not self.fondo.apareciendo:
+                self.estado = "menu"
+
     def siguienteEtapa(self):
         self.etapa += 1
         if self.etapa > 3:
@@ -26,6 +34,11 @@ class GameState:
             print("ganaste")
             pygame.event.post(pygame.event.Event(QUIT))
         self.fondo.cambioEscena(self.zona, self.etapa)
+
+    def taberna(self):
+        self.estado = "cargandoMenu"
+        self.pausa = False
+        self.fondo.taberna()
 
     def reiniciarZona(self):
         self.etapa = 2
@@ -42,9 +55,9 @@ class GameState:
             self.pausa = not self.pausa
 
     def jugar(self):
-        self.estado = "jugando"
+        self.estado = "apareciendo"
         self.pausa = False
-        self.fondo.cambioEscena(1, 1)
+        self.fondo.aparicionEscena(1, 1)
 
     def gameOver(self):
         self.estado = "gameover"
