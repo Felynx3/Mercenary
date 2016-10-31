@@ -10,21 +10,23 @@ class ItemSpawner:
         self.dificultad = dificultad
         self.items = items
         self.imagePath = os.path.join(".", "media", "imagenes", "objetos", "consumibles", "")
-        self.delay = dificultad * 2000
+        self.delay = dificultad * 2500
         self.tipos = ["vida"]
 
     def update(self, personaje):
-        self.delay -= randint(0, 4)
+        self.delay -= randint(0, 3)
         if self.delay <= 0:
             self.spawn()
-        for item in self.items:
-            item.colisionar(personaje)
+        if personaje is not None:
+            for item in self.items:
+                item.colisionar(personaje)
 
     def spawn(self):
-        self.delay = self.dificultad * 1000
-        tipo = self.tipos[randint(0, len(self.tipos) - 1)]
-        pota = Item(tipo, self.imagePath)
-        self.items.add(pota)
+        if len(self.items) < 2:
+            self.delay = self.dificultad * 1000
+            tipo = self.tipos[randint(0, len(self.tipos) - 1)]
+            pota = Item(tipo, self.imagePath)
+            self.items.add(pota)
 
     def reiniciar(self):
         self.delay = self.dificultad * 1000

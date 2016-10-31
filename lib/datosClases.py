@@ -61,9 +61,9 @@ ENEMIGOS_ETAPA = {
     "1-1": 5,
     "1-2": 8,
     "1-3": 10,
-    "2-1": 15,
-    "2-2": 20,
-    "2-3": 25
+    "2-1": 12,
+    "2-2": 15,
+    "2-3": 18
 }
 
 CLASES_ETAPA = {
@@ -75,5 +75,6 @@ CLASES_ETAPA = {
     "2-3": ["goblin"]
 }
 
+ULTIMA_ZONA = 2
 VELOCIDAD_TRANSICION = 10
 ALTURA_BASE = 40
