@@ -41,7 +41,7 @@ class GameState:
     def reiniciarZona(self):
         self.etapa = 2
         self.etapa = 1
-        self.fondo.cambioEscena(self.zona, 1)
+        self.fondo.aparicionEscena(self.zona, 1)
         self.estado = "jugando"
         self.pausa = False
 

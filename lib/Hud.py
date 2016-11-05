@@ -14,7 +14,6 @@ class Hud:
         self.cantEnemigos = 0
         self.font = pygame.font.Font(os.path.join(".", "media", "fuentes", "8-BIT WONDER.TTF"), 50)
         self.textoEnemigos = self.font.render(str(self.cantEnemigos) + "/" + str(self.metaEnemigos), True, (0, 0, 0))
-        self.rect = pygame.rect.Rect((0, 0), (0, 0))
         self.enemigosRect = self.textoEnemigos.get_rect()
         self.imagePath = os.path.join(".", "media", "imagenes", "interfaz", "")
 

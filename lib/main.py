@@ -17,7 +17,7 @@ class Mercenary:
         self.collisionManager = CollisionManager()
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT), flags)
-        self.fondo = Fondo(1, 1, self.screen)
+        self.fondo = Fondo(self.screen)
         self.gameState = GameState(self.fondo)
 
         self.jugador = pygame.sprite.GroupSingle()
@@ -103,9 +103,6 @@ class Mercenary:
         if self.gameState.estado == "menu":
             self.menu.draw(self.screen)
             self.jugador.draw(self.screen)
-            #if menu.getOpcion == "jugar":
-            #    gameState.jugar()
-
         if self.gameState.estado == "gameover":
             self.gameState.drawGameOver(self.screen)
 

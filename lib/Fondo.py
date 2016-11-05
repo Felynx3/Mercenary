@@ -5,10 +5,8 @@ from datos import*
 
 class Fondo():
 
-    def __init__(self, zona, etapa, screen):
+    def __init__(self, screen):
         self.screen = screen
-        self.zona = zona
-        self.etapa = etapa
         self.image = pygame.image.load(os.path.join(".", "media", "imagenes", "menu", "fondo.jpg"))
         self.image = pygame.transform.scale(self.image, (WIDTH, HEIGHT))
         self.height = self.screen.get_rect().h
@@ -41,7 +39,7 @@ class Fondo():
         if self.apareciendo:
             self.blackAlpha += self.alphaSpeed
             self.alphaSpeed -= 3
-            if self.blackAlpha <= -0.1:
+            if self.blackAlpha < 0:
                 self.blackAlpha = 0
                 self.alphaSpeed = 50
                 self.apareciendo = False
@@ -59,8 +57,6 @@ class Fondo():
 
     def cambioEscena(self, zona, etapa):
         self.cambiando = True
-        self.zona = zona
-        self.etapa = etapa
         self.sigImage = pygame.image.load("./media/imagenes/fondos/" + str(zona) + "-" + str(etapa) + ".JPG")
         self.sigRect = self.sigImage.get_rect()
         self.sigRect.w = (self.sigRect.w * self.height) / self.sigRect.h
@@ -70,8 +66,6 @@ class Fondo():
 
     def aparicionEscena(self, zona, etapa):
         self.apareciendo = True
-        self.zona = zona
-        self.etapa = etapa
         self.sigImage = pygame.image.load("./media/imagenes/fondos/" + str(zona) + "-" + str(etapa) + ".JPG")
         self.sigRect = self.sigImage.get_rect()
         self.sigRect.w = (self.sigRect.w * self.height) / self.sigRect.h

@@ -12,18 +12,18 @@ class EnemySpawner:
         self.gameState = gameState
         self.clases = CLASES_ETAPA[self.gameState.getEtapa()]
         self.spawnDelay = 1 / dificultad
-        self.spawnWaiting = 2.0
+        self.tiempoEspera = 2.0
 
     def update(self):
-        self.spawnWaiting -= 0.01
-        if self.spawnWaiting <= 0:
+        self.tiempoEspera -= 0.01
+        if self.tiempoEspera <= 0:
             self.spawnEnemy()
-            self.spawnWaiting = self.spawnDelay
+            self.tiempoEspera = self.spawnDelay
 
     def reiniciar(self):
         self.clases = CLASES_ETAPA[self.gameState.getEtapa()]
         self.enemigos.empty()
-        self.spawnWaiting = 2.5
+        self.tiempoEspera = 2.5
 
     def spawnEnemy(self):
         numeroClase = randint(0, (len(self.clases) - 1) * 3) / 3

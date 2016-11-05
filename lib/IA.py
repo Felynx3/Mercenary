@@ -43,7 +43,4 @@ class IA:
             else:
                 self.sprite.correr("right")
         if self.estado == "atacando":
-            self.atacar()
-
-    def atacar(self):
-        self.sprite.atacar()
+            self.sprite.atacar()

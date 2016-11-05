@@ -25,7 +25,6 @@ class Sprite(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()  # Solo usado para pygame.sprite.Group.draw()
         self.collisionRect = pygame.rect.Rect((0, 0), TAMANOS_SPRITES[clase]["colision"])  # para colisiones con margen, enemigos y ataques.
         self.weaponRect = pygame.rect.Rect((0, 0), TAMANOS_ATAQUES[self.clase][0])
-        self.zPosition = 10
         self.width, self.height = self.image.get_rect().w, self.image.get_rect().h
         self.gravedad = HEIGHT / 120
         self.tiempoSalto = 0.0
@@ -78,7 +77,6 @@ class Sprite(pygame.sprite.Sprite):
 
     def saltar(self):
         if self.saltos < self.numeroSaltos:
-            self.gravedad = HEIGHT / 120
             self.cajaSonidos.reproducir("salto")
             self.saltos += 1
             self.tiempoSalto = 0.0
@@ -163,9 +161,8 @@ class Sprite(pygame.sprite.Sprite):
         self.weaponRect.h = int(self.weaponRect.h * self.escala)
 
     def mover(self, vx, vy):
-        newX, newY = self.x + vx, self.y + vy
-        self.x, self.y = newX, newY
-        self.collisionRect.center = (newX, newY)
+        self.x, self.y = self.x + vx, self.y + vy
+        self.collisionRect.center = (self.x, self.y)
 
     def posicionar(self, x, y):
         self.x, self.y = x, y
