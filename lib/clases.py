@@ -10,3 +10,5 @@ from CollisionManager import CollisionManager
 from GameOver import GameOver
 from MenuPrincipal import MenuPrincipal
 from ItemSpawner import ItemSpawner
+from Proyectil import Proyectil
+from jefes import*

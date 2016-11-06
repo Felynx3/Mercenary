@@ -23,6 +23,7 @@ class Mercenary:
         self.jugador = pygame.sprite.GroupSingle()
         self.enemigos = pygame.sprite.Group()
         self.items = pygame.sprite.Group()
+        self.proyectiles = pygame.sprite.Group()
 
         self.items = pygame.sprite.Group()
         self.personaje = Sprite("jugador", "swordman", False)
@@ -43,6 +44,14 @@ class Mercenary:
                 sys.exit()
             if key == "space":
                 self.personaje.saltar()
+            if key == "r" and self.gameState.estado == "jugando":
+                proyectil = Proyectil("vackura", "right", False, 2, (0, HEIGHT - 50))
+                self.proyectiles.add(proyectil)
+            if key == "t":
+                gargola = GargolaT()
+                gargola.ia = GargolaTIA(gargola, self.personaje)
+                gargola.posicionar(WIDTH / 4, HEIGHT / 2)
+                self.enemigos.add(gargola)
             if key == "left":
                 self.personaje.correr("left")
             if key == "right":
@@ -54,6 +63,7 @@ class Mercenary:
                 self.enemySpawner.reiniciar()
                 self.itemSpawner.reiniciar()
                 self.personaje.reiniciar()
+                self.proyectiles.empty()
                 self.hud.reiniciar()
                 self.jugador.add(self.personaje)
             if key == "z":
@@ -86,9 +96,12 @@ class Mercenary:
                 self.enemigos.update()
                 self.items.update()
                 self.collisionManager.colisionConGrupo(self.personaje, self.enemigos)
+                self.proyectiles.update()
+                self.collisionManager.collisionProyectiles(self.personaje, self.enemigos, self.proyectiles)
                 self.hud.update()
                 self.enemySpawner.update()
                 self.itemSpawner.update(self.jugador.sprite)
+                self.proyectiles.update()
         if self.gameState.estado == "menu":
             self.jugador.update()
             self.menu.update()
@@ -99,7 +112,7 @@ class Mercenary:
             self.enemigos.draw(self.screen)
             self.jugador.draw(self.screen)
             self.hud.draw(self.screen)
-
+            self.proyectiles.draw(self.screen)
         if self.gameState.estado == "menu":
             self.menu.draw(self.screen)
             self.jugador.draw(self.screen)
@@ -118,6 +131,8 @@ class Mercenary:
                     self.gameState.gameOver()
                 if event.type == ATAQUE_MELE:
                     self.collisionManager.colisionArma(event.weaponRect, event.esEnemigo, self.jugador.sprite, self.enemigos, event.dano)
+                if event.type == PROYECTIL:
+                    self.proyectiles.add(event.proyectil)
                 if event.type == ENEMIGO_MUERTO:
                     self.hud.enemigoMuerto()
                 if event.type == META_COMPLETADA:

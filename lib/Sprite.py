@@ -20,7 +20,7 @@ class Sprite(pygame.sprite.Sprite):
         self.imagePath = os.path.join(".", "media", "imagenes", "clases", clase, "")
         if self.clase == "goblin" and not esEnemigo:
             self.imagePath = os.path.join(".", "media", "imagenes", "clases", clase, "especial", "")
-        self.image = pygame.image.load(self.imagePath + "normal" + ".png")
+        self.image = pygame.image.load(self.imagePath + "normal.png")
         self.escala = 2.5
         self.rect = self.image.get_rect()  # Solo usado para pygame.sprite.Group.draw()
         self.collisionRect = pygame.rect.Rect((0, 0), TAMANOS_SPRITES[clase]["colision"])  # para colisiones con margen, enemigos y ataques.

@@ -22,3 +22,15 @@ class CollisionManager:
         if esEnemigo and personaje is not None:
             if armaRect.colliderect(personaje.collisionRect):
                 personaje.herir(dano)
+
+    def collisionProyectiles(self, personaje, enemigos, proyectiles):
+        for proyectil in proyectiles:
+            if proyectil.enemigo:
+                if personaje.collisionRect.colliderect(proyectil.collisionRect) and not proyectil.muerto:
+                    personaje.herir(proyectil.dano)
+                    proyectil.kill()
+            else:
+                for enemigo in enemigos:
+                    if enemigo.collisionRect.colliderect(proyectil.collisionRect) and not proyectil.muerto:
+                        enemigo.herir(proyectil.dano)
+                        proyectil.kill()

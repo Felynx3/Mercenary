@@ -11,7 +11,7 @@ class EnemySpawner:
         self.enemigos = enemigos
         self.gameState = gameState
         self.clases = CLASES_ETAPA[self.gameState.getEtapa()]
-        self.spawnDelay = 1 / dificultad
+        self.spawnDelay = 1.2 / dificultad
         self.tiempoEspera = 2.0
 
     def update(self):
