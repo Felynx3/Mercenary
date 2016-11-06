@@ -77,6 +77,10 @@ class Mercenary:
             if key == "o":
                 pygame.display.toggle_fullscreen()
             if key == "t" and self.gameState.estado == "gameover":
+                self.proyectiles.empty()
+                self.hud.reiniciar()
+                self.itemSpawner.reiniciar()
+                self.enemySpawner.reiniciar()
                 self.gameState.taberna()
                 self.personaje.reiniciar()
                 self.jugador.add(self.personaje)
