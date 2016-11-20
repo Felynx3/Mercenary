@@ -45,7 +45,7 @@ class Mercenary:
             if key == "space":
                 self.personaje.saltar()
             if key == "r" and self.gameState.estado == "jugando":
-                proyectil = Proyectil("vackura", "right", False, 2, (0, HEIGHT - 50))
+                proyectil = Proyectil("vackura", "right", True, 2, (0, HEIGHT - 50))
                 self.proyectiles.add(proyectil)
             if key == "t":
                 gargola = GargolaT()
@@ -115,8 +115,8 @@ class Mercenary:
             self.items.draw(self.screen)
             self.enemigos.draw(self.screen)
             self.jugador.draw(self.screen)
-            self.hud.draw(self.screen)
             self.proyectiles.draw(self.screen)
+            self.hud.draw(self.screen)
         if self.gameState.estado == "menu":
             self.menu.draw(self.screen)
             self.jugador.draw(self.screen)

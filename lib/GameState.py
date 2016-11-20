@@ -31,7 +31,7 @@ class GameState:
             self.etapa = 1
             self.taberna()
         else:
-            self.fondo.cambioEscena(self.zona, self.etapa)
+            self.fondo.aparicionEscena(self.zona, self.etapa)
 
     def taberna(self):
         self.estado = "cargandoMenu"

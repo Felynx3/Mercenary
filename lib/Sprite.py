@@ -14,7 +14,7 @@ class Sprite(pygame.sprite.Sprite):
         self.clase = clase
         self.vida = VIDA[clase]
         self.danoAtaque = DANO_ATAQUE[clase][0]
-        self.ia = None  # Crear clase ia y reemplazarla
+        self.ia = None
         self.dificultad = 1.0
 
         self.imagePath = os.path.join(".", "media", "imagenes", "clases", clase, "")

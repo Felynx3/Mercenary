@@ -22,7 +22,7 @@ DELAY_DISPARO = {
 }
 
 TIEMPO_CARGA = {
-    "gargolaT": 300.0
+    "gargolaT": 600.0
 }
 
 TIPO_ATAQUE = {
@@ -40,7 +40,7 @@ TAMANOS_ATAQUES = {
 ANIMACION_DELAY = {
     "swordman": 100.0,
     "goblin": 100.0,
-    "gargolaT": 80.0
+    "gargolaT": 120.0
 }
 
 NUMERO_SALTOS = {
