@@ -2,13 +2,13 @@
 TAMANOS_SPRITES = {
     "swordman": {"colision": (20, 35), "ataque": (65, 40), "salto": (32, 37), "movimiento": (28, 35)},
     "goblin": {"colision": (17, 18), "ataque": (34, 19), "salto": (0, 0), "movimiento": (18, 20)},
-    "gargolaT": {"colision": (25, 27), "quieto": (25, 29), "carga": (30, 30), "movimiento": (0, 0), "ataque": (0, 0), "salto": (0, 0)}  # CAMBIAR
+    "gargolaT": {"colision": (25, 27), "ataque": (30, 31), "salto": (0, 0), "quieto": (25, 29), "carga": (30, 30)}
     }
 
 ALTURAS_GOLPES = {
     "swordman": [0],
     "goblin": [4, 2],
-    "gargolaT": [5]  # CAMBIAR
+    "gargolaT": [10]  # CAMBIAR
     }
 
 GOLPES_POR_ATAQUE = {
@@ -85,7 +85,7 @@ PROYECTILES = {
 }
 
 TAMANO_PROYECTIL = {
-    "vackura": {"normal": (40, 30), "colision": (24, 40), "muerte": (28, 28)}
+    "vackura": {"normal": (40, 30), "colision": (24, 30), "muerte": (28, 28)}
 }
 
 DANO_PROYECTIL = {

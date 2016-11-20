@@ -12,3 +12,4 @@ from MenuPrincipal import MenuPrincipal
 from ItemSpawner import ItemSpawner
 from Proyectil import Proyectil
 from jefes import*
+from muerto import Muerto

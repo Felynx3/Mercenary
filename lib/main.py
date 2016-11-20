@@ -134,11 +134,13 @@ class Mercenary:
                 if event.type == MUERTO:
                     self.gameState.gameOver()
                 if event.type == ATAQUE_MELE:
-                    self.collisionManager.colisionArma(event.weaponRect, event.esEnemigo, self.jugador.sprite, self.enemigos, event.dano)
+                    self.collisionManager.colisionArma(event.weaponRect, event.esEnemigo, self.jugador.sprite, self.enemigos, event.dano, event.direccion)
                 if event.type == PROYECTIL:
                     self.proyectiles.add(event.proyectil)
                 if event.type == ENEMIGO_MUERTO:
                     self.hud.enemigoMuerto()
+                    muerto = Muerto(event.posicion)
+                    self.enemigos.add(muerto)
                 if event.type == META_COMPLETADA:
                     self.gameState.siguienteEtapa()
                     self.enemySpawner.reiniciar()

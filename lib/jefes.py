@@ -13,6 +13,7 @@ class GargolaT(Sprite):
         self.imagenesCargando = []
         Sprite.__init__(self, "Gargola Terrestre", "gargolaT", True)
         self.collisionRect.center = (WIDTH / 2, HEIGHT / 2)
+        self.alturaProyectil = ALTURAS_GOLPES["gargolaT"][0]
 
     def animar(self):
         direcciones = {"left": 0, "right": 1}
@@ -52,7 +53,8 @@ class GargolaT(Sprite):
             posX = self.collisionRect.left
         else:
             posX = self.collisionRect.right
-        proyectil = Proyectil("vackura", self.direccion, True, self.escala, (posX, self.collisionRect.y))
+        posY = self.collisionRect.bottom - self.alturaProyectil - TAMANO_PROYECTIL["vackura"]["normal"][1] * self.escala / 2
+        proyectil = Proyectil("vackura", self.direccion, True, self.escala, (posX, posY))
         evento = pygame.event.Event(PROYECTIL, proyectil=proyectil)
         pygame.event.post(evento)
 

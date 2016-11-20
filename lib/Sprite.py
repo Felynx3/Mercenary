@@ -37,6 +37,9 @@ class Sprite(pygame.sprite.Sprite):
         self.x, self.y = 0.0, 0.0
         self.cajaSonidos = CajaSonidos(clase)
 
+        self.empuje = None
+        self.muerto = False
+
         self.atacando = False
         self.golpesPorAtaque = GOLPES_POR_ATAQUE[self.clase]
         self.golpe = 0
@@ -74,6 +77,16 @@ class Sprite(pygame.sprite.Sprite):
         else:
             self.vx = -self.velocidadMovimiento / 3
             self.posicionar(WIDTH + self.collisionRect.w, HEIGHT)
+
+    def empujar(self, direccion):
+        if self.empuje is None:
+            self.saltos += 1
+            self.tiempoSalto = 0.0
+            self.vy = -4
+            self.empuje = direccion
+
+    def detenerEmpuje(self):
+        self.empuje = None
 
     def saltar(self):
         if self.saltos < self.numeroSaltos:
@@ -118,6 +131,7 @@ class Sprite(pygame.sprite.Sprite):
                     self.direccion = "right"
 
     def colisionar(self, rect):
+        self.detenerEmpuje()
         self.mover(-self.vx, 0)
         # en caso de que sea enemigo
         # si esta a la derecha
@@ -129,13 +143,18 @@ class Sprite(pygame.sprite.Sprite):
         if self.collisionRect.bottom > rect.top and self.collisionRect.bottom < rect.top + self.vy + 1:
             self.cancelarSalto()
             self.setBottom(rect.top)
+            self.herir(1)
+            if self.collisionRect.centerx < rect.centerx:
+                self.empujar("left")
+            else:
+                self.empujar("right")
 
     def herir(self, dano):
         self.vida -= int(dano)
         if self.vida <= 0:
             self.kill()
             if self.esEnemigo:
-                enemigoMuerto = pygame.event.Event(ENEMIGO_MUERTO)
+                enemigoMuerto = pygame.event.Event(ENEMIGO_MUERTO, posicion=self.collisionRect.center)
                 pygame.event.post(enemigoMuerto)
             else:
                 pygame.event.post(pygame.event.Event(MUERTO))
@@ -194,7 +213,13 @@ class Sprite(pygame.sprite.Sprite):
             self.animar()
             self.tiempoParaAnimar = self.animacionDelay
         self.vy += self.gravedad * self.tiempoSalto
-        self.mover((self.vx), (self.vy))
+        if self.empuje is not None:
+            if self.empuje == "left":
+                self.mover(-4, self.vy)
+            elif self.empuje == "right":
+                self.mover(4, self.vy)
+        else:
+            self.mover((self.vx), (self.vy))
         self.mantenerDentroDe(escenaRect)
         self.alinearRects()
 
@@ -206,7 +231,8 @@ class Sprite(pygame.sprite.Sprite):
         self.collisionRect.center = (self.x, self.y)
         self.weaponRect.w = int(self.weaponRect.w * escala)
         self.weaponRect.h = int(self.weaponRect.h * escala)
-        wMov, hMov = TAMANOS_SPRITES[self.clase]["movimiento"][0] * escala, TAMANOS_SPRITES[self.clase]["movimiento"][1] * escala
+        if VELOCIDAD_MOVIMIENTO[self.clase] != 0:
+            wMov, hMov = TAMANOS_SPRITES[self.clase]["movimiento"][0] * escala, TAMANOS_SPRITES[self.clase]["movimiento"][1] * escala
         wAtaque, hAtaque = TAMANOS_SPRITES[self.clase]["ataque"][0] * escala, TAMANOS_SPRITES[self.clase]["ataque"][1] * escala
         wSalto, hSalto = TAMANOS_SPRITES[self.clase]["salto"][0] * escala, TAMANOS_SPRITES[self.clase]["salto"][1] * escala
         for j in range(2):
@@ -225,7 +251,7 @@ class Sprite(pygame.sprite.Sprite):
         if self.atacando:
             for frame in self.framesDano:
                 if self.imagenIndex == frame - 1:
-                    atacar = pygame.event.Event(ATAQUE_MELE, weaponRect=self.weaponRect, esEnemigo=self.esEnemigo, dano=self.danoAtaque)
+                    atacar = pygame.event.Event(ATAQUE_MELE, weaponRect=self.weaponRect, esEnemigo=self.esEnemigo, dano=self.danoAtaque, direccion=self.direccion)
                     pygame.event.post(atacar)
                     self.siguienteGolpe()
             # fin del ataque
@@ -238,7 +264,7 @@ class Sprite(pygame.sprite.Sprite):
                 elif self.vx < 0:
                     self.direccion = "left"
         # si esta saltando
-        elif self.saltos > 0:
+        elif self.saltos > 0 and self.numeroSaltos > 0:
             # hacia arriba
             if self.vy < 0 and self.imagenIndex >= int(self.framesAnimacion["salto"] / 2):  # 2
                 self.imagenIndex = int(self.framesAnimacion["salto"] / 2) - 1
@@ -248,7 +274,6 @@ class Sprite(pygame.sprite.Sprite):
         # Si esta corriendo
         elif self.imagenIndex >= self.framesAnimacion["movimiento"]:
             self.imagenIndex = 0
-
         # camina hacia la derecha
         if not self.atacando:
             if self.vx > 0 and self.saltos == 0:
@@ -263,7 +288,7 @@ class Sprite(pygame.sprite.Sprite):
             elif self.direccion == "left" and self.vx == 0:
                 self.image = self.imagenNormal[0]
             # esta saltando
-            if self.saltos > 0:
+            if self.saltos > 0 and self.numeroSaltos > 0:
                 # carga la imagen segun direccion
                 if self.direccion == "right":
                     self.image = self.imagenesSaltando[int(self.imagenIndex)][1]
@@ -290,6 +315,7 @@ class Sprite(pygame.sprite.Sprite):
         if self.collisionRect.bottom > rect.bottom:
             self.setBottom(rect.bottom)
             self.cancelarSalto()
+            self.detenerEmpuje()
         if self.entrando and (self.collisionRect.left > rect.left and self.collisionRect.right < rect.right):
             self.entrando = False
 

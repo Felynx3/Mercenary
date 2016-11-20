@@ -15,7 +15,8 @@ class Proyectil(pygame.sprite.Sprite):
         self.image = pygame.image.load(self.imagePath + "normal1.png")
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
-        self.collisionRect = pygame.rect.Rect(self.rect.left, self.rect.top, TAMANO_PROYECTIL[nombre]["normal"][0] * escala, TAMANO_PROYECTIL[nombre]["normal"][1] * escala)
+        self.x, self.y = x, y
+        self.collisionRect = pygame.rect.Rect(self.rect.left, self.rect.top, TAMANO_PROYECTIL[nombre]["colision"][0] * escala, TAMANO_PROYECTIL[nombre]["colision"][1] * escala)
         self.dano = DANO_PROYECTIL[nombre]
         self.velocidad = VELOCIDAD_PROYECTIL[nombre]
         if self.direccion == "left":
@@ -27,18 +28,21 @@ class Proyectil(pygame.sprite.Sprite):
         self.imagenes = []
         self.imagenesMuerte = []
         self.cargarImagenes(escala)
+        self.alinearRects()
 
     def update(self):
         self.tiempoParaAnimar -= 1000 / 60
         if self.tiempoParaAnimar <= 0:
             self.animar()
             self.tiempoParaAnimar = self.animacionDelay
-        self.rect.centerx += self.velocidad
+        self.x += self.velocidad
+        #self.rect.centerx += self.velocidad
         self.alinearRects()
         if self.rect.left >= WIDTH or self.rect.right <= 0:
             pygame.sprite.Sprite.kill(self)
 
     def alinearRects(self):
+        self.rect.center = (self.x, self.y)
         self.collisionRect.centery = self.rect.y
         if self.direccion == "left":
             self.collisionRect.left = self.rect.left

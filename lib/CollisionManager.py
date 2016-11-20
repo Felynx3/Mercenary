@@ -7,21 +7,23 @@ class CollisionManager:
         pass
 
     def colisionConGrupo(self, personaje, grupo):
-        personajeCollisionRect = personaje.collisionRect
+        rect = personaje.collisionRect
         for sprite in grupo.sprites():
-            groupCollisionRect = sprite.collisionRect
-            if personajeCollisionRect.colliderect(groupCollisionRect):
-                personaje.colisionar(groupCollisionRect)
-                sprite.colisionar(personajeCollisionRect)
+            grouprect = sprite.collisionRect
+            if rect.colliderect(grouprect):
+                personaje.colisionar(grouprect)
+                sprite.colisionar(rect)
 
-    def colisionArma(self, armaRect, esEnemigo, personaje, grupo, dano):
+    def colisionArma(self, armaRect, esEnemigo, personaje, grupo, dano, direccion):
         if not esEnemigo:
             for enemy in grupo.sprites():
                 if armaRect.colliderect(enemy.collisionRect):
                     enemy.herir(dano)
+                    enemy.empujar(direccion)
         if esEnemigo and personaje is not None:
             if armaRect.colliderect(personaje.collisionRect):
                 personaje.herir(dano)
+                personaje.empujar(direccion)
 
     def collisionProyectiles(self, personaje, enemigos, proyectiles):
         for proyectil in proyectiles:
