@@ -42,7 +42,7 @@ class Mercenary:
             if key == "q":
                 pygame.quit()
                 sys.exit()
-            if key == "space":
+            if key == "z":
                 self.personaje.saltar()
             if key == "r" and self.gameState.estado == "jugando":
                 proyectil = Proyectil("vackura", "right", True, 2, (0, HEIGHT - 50))
@@ -66,7 +66,7 @@ class Mercenary:
                 self.proyectiles.empty()
                 self.hud.reiniciar()
                 self.jugador.add(self.personaje)
-            if key == "z":
+            if key == "x":
                 if self.gameState.estado == "jugando":
                     self.personaje.atacar()
                 if self.gameState.estado == "menu":
