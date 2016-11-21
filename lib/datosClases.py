@@ -126,4 +126,4 @@ CLASES_ETAPA = {
 # ------------------------OTROS------------------------------
 ULTIMA_ZONA = 2
 VELOCIDAD_TRANSICION = 10
-ALTURA_BASE = 40
+ALTURA_BASE = 60
