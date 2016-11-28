@@ -52,7 +52,7 @@ class Mercenary:
                 self.personaje.correr("right")
             if key == "p":
                 self.gameState.pausar()
-            if key == "r" and self.gameState.estado == "gameover":
+            if key == "r" and self.gameState.estado == "gameover":  # REINICIAR
                 self.gameState.reiniciarZona()
                 self.enemySpawner.reiniciar()
                 self.itemSpawner.reiniciar()
@@ -60,12 +60,14 @@ class Mercenary:
                 self.proyectiles.empty()
                 self.hud.reiniciar()
                 self.jugador.add(self.personaje)
+                self.musica.reiniciar()
             if key == "x":
                 if self.gameState.estado == "jugando":
                     self.personaje.atacar()
                 if self.gameState.estado == "menu":
                     if self.menu.getOpcion(self.personaje) == "jugar":
                         self.gameState.jugar()
+                        self.musica.reiniciar()
             if key == "a":
                 self.enemySpawner.spawnEnemy()
             if key == "o":
@@ -78,6 +80,7 @@ class Mercenary:
                 self.gameState.taberna()
                 self.personaje.reiniciar()
                 self.jugador.add(self.personaje)
+                self.musica.taberna()
         if event.type == KEYUP:
             key = pygame.key.name(event.key)
             if key == "left":
@@ -128,6 +131,7 @@ class Mercenary:
                     self.keyHandler(event)
                 if event.type == MUERTO:
                     self.gameState.gameOver()
+                    self.musica.gameOver()
                 if event.type == ATAQUE_MELE:
                     self.collisionManager.colisionArma(event.weaponRect, event.esEnemigo, self.jugador.sprite, self.enemigos, event.dano, event.direccion)
                 if event.type == PROYECTIL:

@@ -158,6 +158,8 @@ class Sprite(pygame.sprite.Sprite):
                 pygame.event.post(enemigoMuerto)
             else:
                 pygame.event.post(pygame.event.Event(MUERTO))
+        sonido = pygame.mixer.Sound("./media/sonidos/golpe.mp3")
+        sonido.play()
 
     def curar(self, cantidad):
         self.vida += cantidad

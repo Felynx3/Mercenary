@@ -1,4 +1,5 @@
 import pygame
+from datosClases import*
 
 
 class CajaSonidos:
@@ -6,11 +7,15 @@ class CajaSonidos:
     def __init__(self, clase):
         self.clase = clase
         directorio = "./media/sonidos/" + clase + "/"
-        if clase != "bomba":
+        if NUMERO_SALTOS[self.clase] > 0:
             self.sonidos = {
                 "salto": pygame.mixer.Sound(directorio + "salto.mp3"),
                 "caida": pygame.mixer.Sound(directorio + "caida.mp3")}
+        else:
+            self.sonidos = {
+                "caida": pygame.mixer.Sound(directorio + "caida.mp3")}
 
     def reproducir(self, sonido):
-        if self.clase != "bomba":
-            self.sonidos[sonido].play()
+        self.sonidos[sonido].play()
+
+        #ARREGLAR SONIDO MUERTE:

@@ -94,7 +94,6 @@ class GargolaTIA(IA):
             self.disparar()
         if abs(self.distanciaObjetivo) < 150 and self.tiempoTransporte <= 0:
             self.transportar()
-            print(pygame.time.Clock().get_time())
         self.actuar()
 
     def transportar(self):
