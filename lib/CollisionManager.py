@@ -1,4 +1,5 @@
 from lib import*
+from jefes import ProyectilTransporte
 
 
 class CollisionManager:
@@ -27,12 +28,16 @@ class CollisionManager:
 
     def collisionProyectiles(self, personaje, enemigos, proyectiles):
         for proyectil in proyectiles:
+            if isinstance(proyectil, ProyectilTransporte):
+                continue
             if proyectil.enemigo:
                 if personaje.collisionRect.colliderect(proyectil.collisionRect) and not proyectil.muerto:
                     personaje.herir(proyectil.dano)
                     proyectil.kill()
             else:
                 for enemigo in enemigos:
+                    if isinstance(proyectil, ProyectilTransporte):
+                        continue
                     if enemigo.collisionRect.colliderect(proyectil.collisionRect) and not proyectil.muerto:
                         enemigo.herir(proyectil.dano)
                         proyectil.kill()

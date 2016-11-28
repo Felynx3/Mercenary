@@ -6,12 +6,8 @@ from clases import*
 
 
 class Mercenary:
-    pygame.mixer.pre_init(22050, 16, 2, 64)
-    pygame.mixer.init()
     pygame.init()
     pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
-    pygame.mixer.music.load("./media/sonidos/musica/fondo1.mp3")
-    pygame.mixer.music.play(-1)
 
     def __init__(self):
         self.collisionManager = CollisionManager()
@@ -19,6 +15,7 @@ class Mercenary:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT), flags)
         self.fondo = Fondo(self.screen)
         self.gameState = GameState(self.fondo)
+        self.musica = CajaMusica()
 
         self.jugador = pygame.sprite.GroupSingle()
         self.enemigos = pygame.sprite.Group()
@@ -48,10 +45,7 @@ class Mercenary:
                 proyectil = Proyectil("vackura", "right", True, 2, (0, HEIGHT - 50))
                 self.proyectiles.add(proyectil)
             if key == "t":
-                gargola = GargolaT()
-                gargola.ia = GargolaTIA(gargola, self.personaje)
-                gargola.posicionar(WIDTH / 4, HEIGHT / 2)
-                self.enemigos.add(gargola)
+                self.enemySpawner.desplegarJefe()
             if key == "left":
                 self.personaje.correr("left")
             if key == "right":
@@ -92,6 +86,7 @@ class Mercenary:
                 self.personaje.detener("right")
 
     def update(self):
+        self.musica.update()
         self.fondo.update()
         self.gameState.update()
         if self.gameState.estado == "jugando":
@@ -145,6 +140,8 @@ class Mercenary:
                     self.gameState.siguienteEtapa()
                     self.enemySpawner.reiniciar()
                     self.itemSpawner.reiniciar()
+                if event.type == SONIDO:
+                    event.sonido.play()
 
             self.update()
             self.draw()

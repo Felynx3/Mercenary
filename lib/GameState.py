@@ -9,6 +9,7 @@ class GameState:
         self.etapa = 1
         self.estado = "menu"
         self.pausa = False
+        self.boss = False
 
         self.gameOverScreen = GameOver()
 
@@ -21,17 +22,23 @@ class GameState:
                 self.estado = "menu"
 
     def siguienteEtapa(self):
+        self.boss = False
         self.etapa += 1
         if self.etapa > 3:
             self.etapa = 1
             self.zona += 1
+        if self.etapa == 3:
+            self.boss = True
         if self.zona > ULTIMA_ZONA:
             #hacer algo cuando se termina el juego
             self.zona = 1
             self.etapa = 1
-            self.taberna()
+            pygame.event.post(pygame.event.Event(MUERTO))
         else:
             self.fondo.aparicionEscena(self.zona, self.etapa)
+
+    def contraJefe(self):
+        return self.boss
 
     def taberna(self):
         self.estado = "cargandoMenu"
@@ -39,11 +46,13 @@ class GameState:
         self.fondo.taberna()
 
     def reiniciarZona(self):
-        self.etapa = 2
-        self.etapa = 1
-        self.fondo.aparicionEscena(self.zona, 1)
+        #self.etapa = 1
+        self.fondo.aparicionEscena(self.zona, self.etapa)
         self.estado = "jugando"
         self.pausa = False
+        self.boss = False
+        if self.etapa == 3:
+            self.boss = True
 
     def getEtapa(self):
         return str(self.zona) + "-" + str(self.etapa)
@@ -59,6 +68,7 @@ class GameState:
 
     def gameOver(self):
         self.estado = "gameover"
+        self.boss = False
 
     def drawGameOver(self, screen):
         self.gameOverScreen.draw(screen)

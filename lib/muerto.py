@@ -1,5 +1,6 @@
 import pygame
 import os
+from constantes import*
 
 
 class Muerto(pygame.sprite.Sprite):
@@ -17,6 +18,12 @@ class Muerto(pygame.sprite.Sprite):
         self.cargarImagenes()
         self.delayAnimacion = 1000 / 10
         self.tiempoAnimacion = self.delayAnimacion
+        self.reproducirSonido()
+
+    def reproducirSonido(self):
+        sonidoMuerte = pygame.mixer.Sound("./media/sonidos/muerte.mp3")
+        evento = pygame.event.Event(SONIDO, sonido=sonidoMuerte)
+        pygame.event.post(evento)
 
     def cargarImagenes(self):
         for i in range(1, 6):
