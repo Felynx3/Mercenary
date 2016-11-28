@@ -50,7 +50,15 @@ class GameState:
         pygame.mixer.music.play()
 
     def reiniciarZona(self):
-        #self.etapa = 1
+        self.etapa = 1
+        self.fondo.aparicionEscena(self.zona, self.etapa)
+        self.estado = "jugando"
+        self.pausa = False
+        self.boss = False
+        if self.etapa == 3:
+            self.boss = True
+
+    def reiniciarEtapa(self):
         self.fondo.aparicionEscena(self.zona, self.etapa)
         self.estado = "jugando"
         self.pausa = False
@@ -66,6 +74,8 @@ class GameState:
             self.pausa = not self.pausa
 
     def jugar(self):
+        self.etapa = 1
+        self.zona = 1
         self.estado = "apareciendo"
         self.pausa = False
         self.fondo.aparicionEscena(self.zona, self.etapa)

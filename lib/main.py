@@ -53,7 +53,7 @@ class Mercenary:
             if key == "p":
                 self.gameState.pausar()
             if key == "r" and self.gameState.estado == "gameover":  # REINICIAR
-                self.gameState.reiniciarZona()
+                self.gameState.reiniciarEtapa()
                 self.enemySpawner.reiniciar()
                 self.itemSpawner.reiniciar()
                 self.personaje.reiniciar()
@@ -68,6 +68,7 @@ class Mercenary:
                     if self.menu.getOpcion(self.personaje) == "jugar":
                         self.gameState.jugar()
                         self.musica.reiniciar()
+                        self.enemySpawner.reiniciar()
             if key == "a":
                 self.enemySpawner.spawnEnemy()
             if key == "o":
