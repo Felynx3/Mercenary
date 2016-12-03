@@ -6,6 +6,8 @@ from clases import*
 
 
 class Mercenary:
+    pygame.mixer.pre_init(22050, 16, 2, 64)
+    pygame.mixer.init()
     pygame.init()
     pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
 
@@ -27,8 +29,8 @@ class Mercenary:
         self.personaje = Sprite("jugador", "swordman", False)
         self.personaje.posicionar(WIDTH / 2, HEIGHT / 2)
 
-        self.enemySpawner = EnemySpawner(self.gameState, self.enemigos, 1, self.personaje)
-        self.itemSpawner = ItemSpawner(self.items, 1)
+        self.enemySpawner = EnemySpawner(self.gameState, self.enemigos, DIFICULTAD, self.personaje)
+        self.itemSpawner = ItemSpawner(self.items, DIFICULTAD)
         self.jugador.add(self.personaje)
 
         self.menu = MenuPrincipal(self.personaje)
@@ -122,6 +124,7 @@ class Mercenary:
             self.jugador.draw(self.screen)
         if self.gameState.estado == "gameover":
             self.gameState.drawGameOver(self.screen)
+        self.fondo.drawBlackScreen()
 
     def main(self):
         while True:

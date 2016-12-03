@@ -6,8 +6,6 @@ from random import randint
 class CajaMusica:
 
     def __init__(self):
-        pygame.mixer.pre_init(22050, 16, 2, 64)
-        pygame.mixer.init()
         self.musicPath = os.path.join(".", "media", "sonidos", "musica", "fondo")
         self.canciones = []
         self.derrota = None

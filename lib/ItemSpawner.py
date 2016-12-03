@@ -53,6 +53,7 @@ class Item(pygame.sprite.Sprite):
         if self.rect.colliderect(personaje.collisionRect):
             if self.tipo == "vida":
                 personaje.curar(self.cantidad)
+                pygame.event.post(pygame.event.Event(SONIDO, sonido="pocion"))
                 self.kill()
 
     def update(self):

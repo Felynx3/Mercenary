@@ -47,6 +47,9 @@ class Fondo():
                 self.image = self.sigImage
                 self.rect = self.sigRect
             self.pantallaNegra.set_alpha(self.blackAlpha)
+
+    def drawBlackScreen(self):
+        if self.apareciendo:
             self.screen.blit(self.pantallaNegra, self.pantallaNegra.get_rect())
 
     def adaptar(self, height):
