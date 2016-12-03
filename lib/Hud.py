@@ -13,7 +13,7 @@ class Hud:
         self.metaEnemigos = ENEMIGOS_ETAPA[str(gameState.zona) + "-" + str(gameState.etapa)]
         self.cantEnemigos = 0
         self.font = pygame.font.Font(os.path.join(".", "media", "fuentes", "8-BIT WONDER.TTF"), 50)
-        self.textoEnemigos = self.font.render(str(self.cantEnemigos) + " I " + str(self.metaEnemigos), True, (0, 0, 0))
+        self.textoEnemigos = self.font.render(str(self.cantEnemigos) + " I " + str(self.metaEnemigos), True, (255, 255, 255))
         self.enemigosRect = self.textoEnemigos.get_rect()
         self.imagePath = os.path.join(".", "media", "imagenes", "interfaz", "")
 
@@ -38,7 +38,7 @@ class Hud:
             pygame.event.post(metaCompletada)
         self.enemigosRect = self.textoEnemigos.get_rect()
         self.enemigosRect.right = WIDTH
-        self.textoEnemigos = self.font.render(str(self.cantEnemigos) + " I " + str(self.metaEnemigos), True, (0, 0, 0))
+        self.textoEnemigos = self.font.render(str(self.cantEnemigos) + " I " + str(self.metaEnemigos), True, (255, 255, 255))
         self.actualizarCorazones()
 
     def draw(self, screen):
