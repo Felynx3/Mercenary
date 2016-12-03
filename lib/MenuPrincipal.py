@@ -1,26 +1,30 @@
 import os
 import pygame
 from datos import*
+from SpriteEstatico import SpriteEstatico
 
 
 class MenuPrincipal:
 
     def __init__(self, jugador):
         self.font = pygame.font.Font(os.path.join(".", "media", "fuentes", "8-BIT WONDER.TTF"), 40)
-
-        self.jugar = pygame.sprite.Sprite()
-        self.jugar.image = pygame.image.load(os.path.join(".", "media", "imagenes", "clases", "goblin", "walk4.png"))
-        self.jugar.image = pygame.transform.scale(self.jugar.image, (self.jugar.image.get_rect().w * 4, self.jugar.image.get_rect().h * 4))
-        self.jugarRect = self.jugar.image.get_rect()
-        self.jugarRect.left, self.jugarRect.bottom = 120, HEIGHT - ALTURA_BASE
+        self.opciones = []
+        self.cargarOpciones()
 
     def update(self):
-        pass
+        for opcion in self.opciones:
+            opcion.update()
 
     def getOpcion(self, personaje):
-        if personaje.collisionRect.colliderect(self.jugarRect):
-            return "jugar"
+        for opcion in self.opciones:
+            if personaje.collisionRect.colliderect(opcion.rect):
+                return opcion.opcion
         return(None)
 
     def draw(self, screen):
-        screen.blit(self.jugar.image, self.jugarRect)
+        for opcion in self.opciones:
+            screen.blit(opcion.image, opcion.rect)
+
+    def cargarOpciones(self):
+        jugar = SpriteEstatico("jugar")
+        self.opciones.append(jugar)

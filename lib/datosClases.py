@@ -139,6 +139,14 @@ CLASES_ETAPA = {
     "2-3": ["goblin"]
 }
 
+# -------------------------MENU------------------------------
+FRAMES_OPCION = {
+    "jugar": 3
+}
+
+ANIMACION_PING_PONG = {
+    "jugar": True
+}
 # ------------------------OTROS------------------------------
 ULTIMA_ZONA = 2
 VELOCIDAD_TRANSICION = 10
