@@ -14,6 +14,7 @@ class Mercenary:
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT), flags)
         self.fondo = Fondo(self.screen)
+        self.sonidos = CajaSonidos()
         self.gameState = GameState(self.fondo)
         self.musica = CajaMusica()
 
@@ -146,7 +147,7 @@ class Mercenary:
                     self.enemySpawner.reiniciar()
                     self.itemSpawner.reiniciar()
                 if event.type == SONIDO:
-                    event.sonido.play()
+                    self.sonidos.reproducir(event.sonido)
 
             self.update()
             self.draw()

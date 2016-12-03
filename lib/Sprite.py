@@ -1,7 +1,6 @@
 import pygame
 import os
 from datos import*
-from CajaSonidos import*
 from IA import*
 
 
@@ -35,7 +34,6 @@ class Sprite(pygame.sprite.Sprite):
         self.velocidadMovimiento = VELOCIDAD_MOVIMIENTO[self.clase]
         self.vx, self.vy = 0.0, 0.0
         self.x, self.y = 0.0, 0.0
-        self.cajaSonidos = CajaSonidos(clase)
 
         self.empuje = None
         self.muerto = False
@@ -90,7 +88,8 @@ class Sprite(pygame.sprite.Sprite):
 
     def saltar(self):
         if self.saltos < self.numeroSaltos:
-            self.cajaSonidos.reproducir("salto")
+            evento = pygame.event.Event(SONIDO, sonido="salto")
+            pygame.event.post(evento)
             self.saltos += 1
             self.tiempoSalto = 0.0
             self.vy = -self.collisionRect.h / 5.5
@@ -101,7 +100,8 @@ class Sprite(pygame.sprite.Sprite):
         self.saltos = 0
         self.vy = 0.0
         if self.tiempoSalto > 0.1:
-            self.cajaSonidos.reproducir("caida")
+            evento = pygame.event.Event(SONIDO, sonido="caida")
+            pygame.event.post(evento)
         self.tiempoSalto = 0.0
 
     def correr(self, direccion):
@@ -152,14 +152,16 @@ class Sprite(pygame.sprite.Sprite):
     def herir(self, dano):
         self.vida -= int(dano)
         if self.vida <= 0:
+            evento = pygame.event.Event(SONIDO, sonido="muerte")
+            pygame.event.post(evento)
             self.kill()
             if self.esEnemigo:
                 enemigoMuerto = pygame.event.Event(ENEMIGO_MUERTO, posicion=self.collisionRect.center)
                 pygame.event.post(enemigoMuerto)
             else:
                 pygame.event.post(pygame.event.Event(MUERTO))
-        sonido = pygame.mixer.Sound("./media/sonidos/golpe.mp3")
-        sonido.play()
+        evento = pygame.event.Event(SONIDO, sonido="golpe")
+        pygame.event.post(evento)
 
     def curar(self, cantidad):
         self.vida += cantidad

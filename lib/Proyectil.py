@@ -29,6 +29,8 @@ class Proyectil(pygame.sprite.Sprite):
         self.imagenesMuerte = []
         self.cargarImagenes(escala)
         self.alinearRects()
+        self.sonido = pygame.mixer.Sound("./media/sonidos/efectos/proyectil.wav")
+        self.sonido.play()
 
     def update(self):
         self.tiempoParaAnimar -= 1000 / 60
@@ -89,6 +91,8 @@ class Proyectil(pygame.sprite.Sprite):
         self.rect.center = center
 
     def kill(self):
+        pygame.event.post(pygame.event.Event(SONIDO, sonido="explosion"))
+        self.sonido.stop()
         self.muerto = True
         self.imageIndex = 0
         self.velocidad = 0

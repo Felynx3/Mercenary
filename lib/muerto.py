@@ -21,8 +21,7 @@ class Muerto(pygame.sprite.Sprite):
         self.reproducirSonido()
 
     def reproducirSonido(self):
-        sonidoMuerte = pygame.mixer.Sound("./media/sonidos/muerte.mp3")
-        evento = pygame.event.Event(SONIDO, sonido=sonidoMuerte)
+        evento = pygame.event.Event(SONIDO, sonido="muerte")
         pygame.event.post(evento)
 
     def cargarImagenes(self):
