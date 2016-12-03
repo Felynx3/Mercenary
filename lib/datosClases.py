@@ -134,9 +134,9 @@ CLASES_ETAPA = {
     "1-1": ["goblin"],
     "1-2": ["minitroll", "goblin"],
     "1-3": ["jefe"],
-    "2-1": ["goblin"],
-    "2-2": ["goblin"],
-    "2-3": ["goblin"]
+    "2-1": ["minitroll", "goblin"],
+    "2-2": ["minitroll"],
+    "2-3": ["minitroll"]
 }
 
 # -------------------------MENU------------------------------
