@@ -46,8 +46,6 @@ class GameState:
         self.estado = "cargandoMenu"
         self.pausa = False
         self.fondo.taberna()
-        pygame.mixer.music.load("./media/sonidos/musica/taberna.mp3")
-        pygame.mixer.music.play()
 
     def reiniciarZona(self):
         self.etapa = 1

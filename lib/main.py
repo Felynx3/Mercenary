@@ -6,7 +6,7 @@ from clases import*
 
 
 class Mercenary:
-    pygame.mixer.pre_init(22050, 16, 2, 64)
+    pygame.mixer.pre_init(22050, -16, 2, 64)
     pygame.mixer.init()
     pygame.init()
     pygame.event.set_allowed([QUIT, KEYDOWN, KEYUP])
@@ -19,6 +19,8 @@ class Mercenary:
         self.sonidos = CajaSonidos()
         self.gameState = GameState(self.fondo)
         self.musica = CajaMusica()
+
+        self.presentar()
 
         self.jugador = pygame.sprite.GroupSingle()
         self.enemigos = pygame.sprite.Group()
@@ -124,6 +126,8 @@ class Mercenary:
             self.jugador.draw(self.screen)
         if self.gameState.estado == "gameover":
             self.gameState.drawGameOver(self.screen)
+        if self.gameState.pausa:
+            self.hud.drawPausa(self.screen)
         self.fondo.drawBlackScreen()
 
     def main(self):
@@ -155,5 +159,30 @@ class Mercenary:
             self.update()
             self.draw()
 
+            pygame.display.update()
+            self.clock.tick(60)
+
+    def presentar(self):
+        fondo = pygame.Surface((WIDTH, HEIGHT))
+        fondoRect = fondo.get_rect()
+        fondoRect.left, fondoRect.top = 0, 0
+        fondo.fill((0, 0, 0))
+        imagen = pygame.image.load("./media/imagenes/micifux.png")
+        imagenRect = imagen.get_rect()
+        alpha = 0
+        direccion = 1
+        while True:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+            self.screen.blit(fondo, fondoRect)
+            self.screen.blit(imagen, imagenRect)
+            alpha += 2 * direccion
+            if alpha >= 255:
+                direccion *= -1
+            if alpha < 0:
+                break
+            imagen.set_alpha(alpha)
             pygame.display.update()
             self.clock.tick(60)

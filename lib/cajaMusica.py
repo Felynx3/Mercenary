@@ -18,6 +18,7 @@ class CajaMusica:
             cancion = self.musicPath + str(i) + ".mp3"
             self.canciones.append(cancion)
         self.derrota = os.path.join(".", "media", "sonidos", "musica", "derrota.mp3")
+        self.musicaTaberna = os.path.join(".", "media", "sonidos", "musica", "taberna.mp3")
 
     def update(self):
         if not pygame.mixer.music.get_busy():
@@ -36,5 +37,5 @@ class CajaMusica:
         pygame.mixer.music.load(self.canciones[num])
 
     def taberna(self):
-        pass
-        # Cambiar la cancion a la destinada para la taberna :p
+        pygame.mixer.music.load(self.musicaTaberna)
+        pygame.mixer.music.play(0)

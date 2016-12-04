@@ -22,6 +22,11 @@ class Hud:
         self.imagenesCorazones = []
         self.inicializarCorazones()
 
+        self.pausa = pygame.image.load(self.imagePath + "pausa.png")
+        self.pausa = pygame.transform.scale(self.pausa, (self.pausa.get_rect().w * 7, self.pausa.get_rect().h * 7))
+        self.pausaRect = self.pausa.get_rect()
+        self.pausaRect.center = (WIDTH / 2, HEIGHT / 2)
+
     def reiniciar(self):
         self.cantEnemigos = 0
         self.metaEnemigos = ENEMIGOS_ETAPA[str(self.gameState.zona) + "-" + str(self.gameState.etapa)]
@@ -45,6 +50,9 @@ class Hud:
         for corazon in self.corazones:
             screen.blit(corazon.image, corazon.rect)
         screen.blit(self.textoEnemigos, self.enemigosRect)
+
+    def drawPausa(self, screen):
+        screen.blit(self.pausa, self.pausaRect)
 
     def enemigoMuerto(self):
         self.cantEnemigos += 1
