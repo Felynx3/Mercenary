@@ -22,6 +22,7 @@ class Mercenary:
 
         self.presentar()
 
+        self.musica.taberna()
         self.jugador = pygame.sprite.GroupSingle()
         self.enemigos = pygame.sprite.Group()
         self.items = pygame.sprite.Group()
@@ -46,9 +47,6 @@ class Mercenary:
                 sys.exit()
             if key == "z":
                 self.personaje.saltar()
-            if key == "r" and self.gameState.estado == "jugando":
-                proyectil = Proyectil("vackura", "right", True, 2, (0, HEIGHT - 50))
-                self.proyectiles.add(proyectil)
             if key == "t":
                 self.enemySpawner.desplegarJefe()
             if key == "left":
@@ -172,10 +170,7 @@ class Mercenary:
         alpha = 0
         direccion = 1
         while True:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
+            pygame.event.get()
             self.screen.blit(fondo, fondoRect)
             self.screen.blit(imagen, imagenRect)
             alpha += 2 * direccion
