@@ -46,7 +46,7 @@ class SpriteEstatico(pygame.sprite.Sprite):
             if self.opcion == "jugar":
                 imagen = pygame.transform.scale(imagen, (int(imagen.get_rect().w * 2.2), int(imagen.get_rect().h * 2.2)))
             else:
-                imagen = pygame.transform.scale(imagen, (int(imagen.get_rect().w * 1.8), int(imagen.get_rect().h * 1.8)))
+                imagen = pygame.transform.scale(imagen, (int(imagen.get_rect().w * 1.5), int(imagen.get_rect().h * 1.7)))
 
             self.imagenes.append(imagen)
         self.image = self.imagenes[0]

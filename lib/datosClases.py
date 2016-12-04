@@ -74,8 +74,8 @@ VELOCIDAD_MOVIMIENTO = {
     "swordman": 4,
     "goblin": 2.5,
     "minitroll": 2.7,
-    "imp": 2.9,
-    "frozen": 3.1,
+    "imp": 3.0,
+    "frozen": 2.6,
     "gargolaT": 0
 }
 
@@ -83,8 +83,8 @@ VIDA = {
     "swordman": 16,
     "goblin": 4,
     "minitroll": 6,
-    "imp": 7,
-    "frozen": 9,
+    "imp": 8,
+    "frozen": 12,
     "gargolaT": 24
 }
 
@@ -92,8 +92,8 @@ DANO_ATAQUE = {
     "swordman": [2],
     "goblin": [1, 2],
     "minitroll": [2, 2],
-    "imp": [1, 3],
-    "frozen": [3, 3],
+    "imp": [2, 4],
+    "frozen": [2, 2],
     "gargolaT": [6]
 }
 
@@ -176,9 +176,9 @@ ANIMACION_PING_PONG = {
 
 POSX_OPCION = {
     "jugar": 100,
-    "salir": 700
+    "salir": 698
 }
 # ------------------------OTROS------------------------------
 ULTIMA_ZONA = 2
 VELOCIDAD_TRANSICION = 10
-ALTURA_BASE = 70
+ALTURA_BASE = 60

@@ -11,7 +11,7 @@ class MenuPrincipal:
         self.opciones = []
         self.cargarOpciones()
 
-        self.titulo = self.font.render("Taberda de Eddartt", True, (200, 100, 30))
+        self.titulo = self.font.render("Taberna de Eddartt", True, (200, 100, 30))
         self.tituloRect = self.titulo.get_rect()
         self.tituloRect.centerx, self.tituloRect.top = WIDTH / 2, 85
 

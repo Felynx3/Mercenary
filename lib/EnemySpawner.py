@@ -12,7 +12,7 @@ class EnemySpawner:
         self.enemigos = enemigos
         self.gameState = gameState
         self.clases = CLASES_ETAPA[self.gameState.getEtapa()]
-        self.spawnDelay = 120 / (dificultad * 1)
+        self.spawnDelay = 120 / (dificultad * 0.8)
         self.tiempoEspera = 200
         self.jefeDesplegado = False
 
@@ -36,7 +36,7 @@ class EnemySpawner:
                 self.desplegarJefe()
             return
         enemigo = Sprite("enemigo", clase, True)
-        enemigo.enemigo(self.dificultad * 0.8, self.objetivo)
+        enemigo.enemigo(self.dificultad, self.objetivo)
         ladoEntrada = randint(0, 1)
         lados = ["left", "right"]
         enemigo.entrar(lados[ladoEntrada])

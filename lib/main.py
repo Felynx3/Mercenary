@@ -48,7 +48,7 @@ class Mercenary:
             if key == "z":
                 self.personaje.saltar()
             if key == "t":
-                self.enemySpawner.desplegarJefe()
+                self.itemSpawner.spawn()
             if key == "left":
                 self.personaje.correr("left")
             if key == "right":
