@@ -40,12 +40,10 @@ class Item(pygame.sprite.Sprite):
         self.tipo = tipo  # vida dano etc.
         self.image = pygame.image.load(imagePath + tipo + ".png")
         self.rect = self.image.get_rect()
-        self.image = pygame.transform.scale(self.image, (self.rect.w * HEIGHT / 200, self.rect.h * HEIGHT / 200))
+        self.image = pygame.transform.scale(self.image, (self.rect.w * HEIGHT / 300, self.rect.h * HEIGHT / 300))
         self.rect = self.image.get_rect()
         if tipo == "vida":
             self.cantidad = randint(1, 3)
-        elif tipo == "armadura":
-            self.cantidad = 1
         self.vy = 4
         self.rect.center = (randint(50, WIDTH - 50), HEIGHT / 2)
 

@@ -72,6 +72,9 @@ class Mercenary:
                         self.gameState.jugar()
                         self.musica.reiniciar()
                         self.enemySpawner.reiniciar()
+                    if self.menu.getOpcion(self.personaje) == "salir":
+                        pygame.quit()
+                        sys.exit()
             if key == "a":
                 self.enemySpawner.spawnEnemy()
             if key == "o":

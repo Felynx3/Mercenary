@@ -144,9 +144,9 @@ ANIMACION_DELAY_PROYECTIL = {
 ENEMIGOS_ETAPA = {
     "1-1": 5,
     "1-2": 8,
-    "1-3": 1,
-    "2-1": 12,
-    "2-2": 15,
+    "1-3": 12,
+    "2-1": 15,
+    "2-2": 1,
     "2-3": 20
 }
 
@@ -157,21 +157,28 @@ JEFE_ZONA = {
 CLASES_ETAPA = {
     "1-1": ["goblin"],
     "1-2": ["minitroll", "goblin"],
-    "1-3": ["jefe"],
-    "2-1": ["imp"],
-    "2-2": ["frozen", "imp"],
+    "1-3": ["minitroll", "imp"],
+    "2-1": ["imp", "frozen"],
+    "2-2": ["jefe"],
     "2-3": ["frozen"]
 }
 
 # -------------------------MENU------------------------------
 FRAMES_OPCION = {
-    "jugar": 3
+    "jugar": 3,
+    "salir": 3
 }
 
 ANIMACION_PING_PONG = {
-    "jugar": True
+    "jugar": True,
+    "salir": True
+}
+
+POSX_OPCION = {
+    "jugar": 100,
+    "salir": 700
 }
 # ------------------------OTROS------------------------------
 ULTIMA_ZONA = 2
 VELOCIDAD_TRANSICION = 10
-ALTURA_BASE = 60
+ALTURA_BASE = 70

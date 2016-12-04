@@ -37,14 +37,16 @@ class SpriteEstatico(pygame.sprite.Sprite):
             self.image = self.imagenes[self.index]
 
     def ajustarPosicion(self):
-        if self.opcion == "jugar":
-            return (100, HEIGHT - ALTURA_BASE - 34)
+        return (POSX_OPCION[self.opcion], HEIGHT - ALTURA_BASE - int(self.rect.h / 2))
 
     def cargarImagenes(self):
         imagePath = os.path.join(".", "media", "imagenes", "menu", "")
         for i in range(1, FRAMES_OPCION[self.opcion] + 1):
             imagen = pygame.image.load(imagePath + self.opcion + str(i) + ".png")
-            imagen = pygame.transform.flip(imagen, True, False)
-            imagen = pygame.transform.scale(imagen, (int(imagen.get_rect().w * 2.2), int(imagen.get_rect().h * 2.2)))
+            if self.opcion == "jugar":
+                imagen = pygame.transform.scale(imagen, (int(imagen.get_rect().w * 2.2), int(imagen.get_rect().h * 2.2)))
+            else:
+                imagen = pygame.transform.scale(imagen, (int(imagen.get_rect().w * 1.8), int(imagen.get_rect().h * 1.8)))
+
             self.imagenes.append(imagen)
         self.image = self.imagenes[0]

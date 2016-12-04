@@ -11,6 +11,10 @@ class MenuPrincipal:
         self.opciones = []
         self.cargarOpciones()
 
+        self.titulo = self.font.render("Taberda de Eddartt", True, (200, 100, 30))
+        self.tituloRect = self.titulo.get_rect()
+        self.tituloRect.centerx, self.tituloRect.top = WIDTH / 2, 85
+
     def update(self):
         for opcion in self.opciones:
             opcion.update()
@@ -24,7 +28,10 @@ class MenuPrincipal:
     def draw(self, screen):
         for opcion in self.opciones:
             screen.blit(opcion.image, opcion.rect)
+            screen.blit(self.titulo, self.tituloRect)
 
     def cargarOpciones(self):
         jugar = SpriteEstatico("jugar")
+        salir = SpriteEstatico("salir")
         self.opciones.append(jugar)
+        self.opciones.append(salir)
