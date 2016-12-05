@@ -168,7 +168,7 @@ class Mercenary:
         fondoRect = fondo.get_rect()
         fondoRect.left, fondoRect.top = 0, 0
         fondo.fill((0, 0, 0))
-        imagen = pygame.image.load("./media/imagenes/micifux.png")
+        imagen = pygame.image.load("./media/imagenes/micifux.jpg")
         imagenRect = imagen.get_rect()
         alpha = 0
         direccion = 1
