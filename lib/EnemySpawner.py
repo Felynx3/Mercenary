@@ -12,7 +12,9 @@ class EnemySpawner:
         self.enemigos = enemigos
         self.gameState = gameState
         self.clases = CLASES_ETAPA[self.gameState.getEtapa()]
-        self.spawnDelay = 120 / (dificultad * 0.8)
+        self.spawnDelay = 120 / (dificultad * 0.6)
+        if dificultad < 1:
+            self.spawnDelay = 120 / (dificultad * 0.8)
         self.tiempoEspera = 200
         self.jefeDesplegado = False
 
